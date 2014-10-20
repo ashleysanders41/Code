@@ -1,0 +1,27 @@
+int num = 60; // initial value of color (grey)
+// float means the number defined can have decimals 
+// first array defines the array of the x and y positions
+float mx[] = new float[num]; // sketch follows mouse(horizontally)
+float my[] = new float[num]; // sketch follows mouse(vertically)
+
+void setup() { // setup has the things that will stay the same
+  size(640, 360); // width and height of screem layout (parameters in pixels)
+  noStroke(); // no stroke
+  fill(255, 153); // setting interior of a shape to white and light grey
+}
+
+void draw() { // begin draw
+  background(51); // setting the background color to grey
+  
+  // Cycle through the array, using a different entry on each frame. 
+  // Using modulo (%) like this is faster than moving all the values over.
+  int which = frameCount % num; // if the framecount is divided by a number, show ellipse
+  mx[which] = mouseX; // current horizontal position of mouse on screen
+  my[which] = mouseY; // current vertical position of mouse on screen
+  
+  for (int i = 0; i < num; i++) {   // for loop begin at 0 and will run if i is less than num and add one each time
+    // which+1 is the smallest (the oldest in the array) oldest disappears as new one appears
+    int index = (which+1 + i) % num; // variable index is defined as the array which adding one plus i divided by the remainder of num.
+    ellipse(mx[index], my[index], i, i); // defines the shape as a circle that gets smaller
+  } //end for loop
+} //end code 
